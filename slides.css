@@ -118,7 +118,7 @@
 /* ================= IS IT AI GAME ================= */
 .iq-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(8px,1.2vw,13px);perspective:1200px}
 .iq{position:relative;height:clamp(132px,17vh,160px);border:0;background:transparent;cursor:pointer;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.3,.8,.3,1);padding:0}
-.iq.is-flipped{transform:rotateY(180deg)}
+.iq.is-flipped{transform:rotateY(180deg) !important}
 .iq-face,.iq-back{position:absolute;inset:0;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;backface-visibility:hidden;border:2px solid var(--line);border-bottom-width:5px;background:#fff;box-shadow:0 8px 20px rgba(44,74,58,.06);padding:8px}
 .iq-face .ico{width:38px;height:38px;color:var(--violet);margin-bottom:2px;transition:.2s}
 .iq-face strong{font-family:var(--font-display);font-size:1.02rem;font-weight:800;text-align:center;line-height:1.2}
