@@ -161,16 +161,32 @@
 .bubble.user .stream-cursor{background:#fff}
 .spot{align-self:stretch;background:#fff;border:2px solid var(--line);border-bottom-width:5px;border-radius:20px;padding:clamp(14px,1.8vw,20px);display:flex;flex-direction:column;gap:10px;box-shadow:0 12px 28px rgba(44,74,58,.07)}
 .spot-q{font-family:var(--font-display);font-weight:800;font-size:1.25rem}
-.spot-opts{display:flex;gap:8px;flex-wrap:wrap}
-.spot-opts button{flex:1;min-width:70px;padding:14px 8px;border-radius:14px;border:2px solid var(--line);border-bottom-width:4px;background:#fff;font-family:var(--font-display);font-size:1.5rem;font-weight:800;cursor:pointer;transition:.16s}
+.spot-opts{display:grid;gap:7px}
+.spot-opts button{display:flex;align-items:center;gap:8px;width:100%;padding:10px 12px;border-radius:12px;border:2px solid var(--line);border-bottom-width:3px;background:#fff;font-family:var(--font-body);font-size:.96rem;font-weight:800;text-align:start;cursor:pointer;transition:.16s;line-height:1.4}
 .spot-opts button:hover{border-color:#d9ceff;background:#faf8ff}
 .spot-opts button.is-right{background:var(--green-light);border-color:var(--green);color:var(--green-deep);animation:popGood .5s ease}
 .spot-opts button.is-wrong{background:var(--red-light);border-color:var(--red);color:var(--red-dark);animation:shakeX .5s ease}
 .spot-opts button:disabled{cursor:default}
+.spot-opts button:disabled:not(.is-right):not(.is-wrong){opacity:.55}
 .spot-msg{font-weight:700;color:var(--ink-soft);font-size:.92rem;line-height:1.5;min-height:1.4em}
 .spot-msg.good{color:var(--green-deep)}
 .spot-tip{display:flex;gap:8px;align-items:flex-start;background:var(--yellow-light);border:2px solid #ffe9a8;color:#7a5a00;border-radius:12px;padding:10px 12px;font-size:.86rem;font-weight:700;line-height:1.5;animation:bubbleIn .3s ease}
 .spot-tip .ico{width:18px;height:18px;flex:none;margin-top:1px}
+.spot-tip b{font-weight:800}
+.spot-fix{background:#f2fbe9;border:2px solid #d9f2c6;border-radius:12px;padding:9px 12px;animation:bubbleIn .3s ease}
+.spot-fix b{display:block;font-size:.8rem;color:var(--green-deep);margin-bottom:3px}
+.spot-fix p{font-size:.88rem;font-weight:700;line-height:1.5;color:var(--green-deep)}
+.bubble p + p{margin-top:6px}
+.bubble .steps{list-style:arabic-indic;padding-inline-start:1.45em;margin:6px 0 2px;display:grid;gap:5px}
+.bubble .steps li{padding-inline-start:2px}
+.bubble .steps li::marker{color:var(--violet-dark);font-weight:800}
+.bubble .steps li.is-bad{background:var(--red-light);border:2px solid #ffb3b3;border-radius:8px;padding:4px 8px;color:var(--red-dark);margin-inline-start:-6px;animation:shakeX .6s ease}
+.bubble .steps li.is-bad::after{content:" ✗";font-weight:900}
+.bubble .ai-final{margin-top:7px;font-weight:800}
+#mistakeBody .bubble.ai{min-width:74%}
+.bubble.warn{align-self:flex-start;background:var(--red-light);border:2px solid #ffc9c9;color:#8f2c2c;font-weight:700}
+.bubble.ai.is-vague{border-color:#ffe3a3;background:#fffdf6}
+.bubble .vague-mark{background:#fff1c2;border-radius:4px;padding:0 3px}
 
 /* ================= RULES ================= */
 .rules{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(8px,1.1vw,12px)}
@@ -375,6 +391,11 @@
 
 /* ================= SMALL BITS ================= */
 .math-inline{direction:ltr;unicode-bidi:isolate;display:inline-block;font-weight:800;font-variant-numeric:tabular-nums}
+.calc{direction:ltr;display:inline-flex;align-items:center;gap:.2em;unicode-bidi:isolate;font-weight:800;white-space:nowrap;vertical-align:middle}
+.calc>b{display:inline-block;font-weight:800}
+.calc>i{display:inline-block;font-style:normal;font-weight:700;opacity:.72}
+.calc>.frac{font-size:.82em}
+.calc .calc-w{display:inline-block;font-weight:700}
 .bubble.prompt{font-size:clamp(.85rem,.98vw,.94rem);line-height:1.55;max-width:94%}
 .bad-answer{color:var(--red-dark);font-size:1.15em;font-weight:800;padding:0 2px}
 .confident{display:block;margin-top:4px;font-size:.68rem;color:var(--muted);font-weight:700}

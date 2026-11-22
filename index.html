@@ -8,8 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="slides.css">
+<link rel="stylesheet" href="styles.css?v=5">
+<link rel="stylesheet" href="slides.css?v=5">
 </head>
 <body>
 
@@ -98,7 +98,7 @@
   </div>
   <div class="progress-wrap">
     <div class="progress-track"><div class="progress-fill" id="progressFill"></div><span class="progress-star"><svg class="ico"><use href="#i-star"/></svg></span></div>
-    <span class="progress-label" id="progressLabel">١ من ١٦</span>
+    <span class="progress-label" id="progressLabel">١ من ١٧</span>
   </div>
   <div class="top-actions">
     <div class="xp-pill" id="xpPill" title="نقاط الخبرة"><svg class="ico"><use href="#i-spark"/></svg><span id="xpValue">0</span><small>XP</small></div>
@@ -318,13 +318,13 @@
     </div>
   </section>
 
-  <!-- 6 — قد يخطئ -->
-  <section class="slide" data-key="ai-mistake" data-title="حتى AI يخطئ" data-unit="المحطة الثانية">
+  <!-- 6 — إجابة خاطئة -->
+  <section class="slide" data-key="ai-mistake" data-title="إجابة خاطئة بثقة" data-unit="المحطة الثانية">
     <div class="wrap">
       <header class="head tight">
         <span class="kicker reveal" style="--i:0"><svg class="ico"><use href="#i-warning"/></svg> انتبه!</span>
-        <h2 class="reveal" style="--i:1">واثق… لكنه قد <span class="hl-red">يخطئ</span></h2>
-        <p class="reveal" style="--i:2">اقرأ الإجابة… ثم اكتشف الخطأ بنفسك.</p>
+        <h2 class="reveal" style="--i:1">واثق… ومفصّل… لكنه <span class="hl-red">مخطئ</span></h2>
+        <p class="reveal" style="--i:2">اقرأ الحل كاملًا… ثم اكتشف أين الخطأ.</p>
       </header>
       <div class="mistake-wrap">
         <div class="chat-panel reveal" style="--i:3" id="mistakeChat">
@@ -336,14 +336,49 @@
           <div class="chat-body" id="mistakeBody"></div>
         </div>
         <div class="spot reveal" style="--i:4" id="mistakeSpot">
-          <p class="spot-q">أين الخطأ في الجواب؟</p>
-          <div class="spot-opts" id="mistakeOpts">
-            <button data-v="54" disabled>٥٤</button>
-            <button data-v="56" disabled>٥٦</button>
-            <button data-v="48" disabled>٤٨</button>
+          <p class="spot-q">أين الخطأ في الحل؟</p>
+          <div class="spot-opts list" id="mistakeOpts">
+            <button data-v="den" disabled>جمع المقامين: <span class="calc" dir="ltr"><b>٤</b><i>+</i><b>٢</b></span></button>
+            <button data-v="num" disabled>جمع البسطين: <span class="calc" dir="ltr"><b>٣</b><i>+</i><b>١</b></span></button>
+            <button data-v="simplify" disabled>تبسيط <span class="math-inline" dir="ltr">٤/٦</span> إلى <span class="math-inline" dir="ltr">٢/٣</span></button>
           </div>
-          <p class="spot-msg" id="mistakeMsg">انتظر الجواب…</p>
-          <div class="spot-tip" hidden id="mistakeTip"><svg class="ico"><use href="#i-bulb"/></svg> الآلة واثقة… لكنها ليست معصومة. راجع دائمًا من الكتاب أو المعلم.</div>
+          <p class="spot-msg" id="mistakeMsg">انتظر الحل…</p>
+          <div class="spot-tip" hidden id="mistakeTip"><svg class="ico"><use href="#i-warning"/></svg> <span><b>التفصيل ليس دليلًا على الصحة.</b> المقامات لا تُجمع؛ وحّدها أولًا، ثم اجمع البسطين.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 — إجابة غير مفيدة -->
+  <section class="slide" data-key="ai-useless" data-title="إجابة غير مفيدة" data-unit="المحطة الثانية">
+    <div class="wrap">
+      <header class="head tight">
+        <span class="kicker reveal" style="--i:0"><svg class="ico"><use href="#i-warning"/></svg> جواب بلا فائدة</span>
+        <h2 class="reveal" style="--i:1">كلام كثير… <span class="hl">بلا شرح</span></h2>
+        <p class="reveal" style="--i:2">يبدو مطمئنًا… لكنه لا يعلّمك شيئًا. اكتشف الخلل.</p>
+      </header>
+      <div class="mistake-wrap">
+        <div class="chat-panel reveal" style="--i:3" id="uselessChat">
+          <div class="chat-top">
+            <span class="ai-ava"><svg class="ico"><use href="#i-spark"/></svg></span>
+            <div><strong>مساعد ذكي</strong><small><i class="online"></i> متصل</small></div>
+            <span class="chat-badge">AI</span>
+          </div>
+          <div class="chat-body" id="uselessBody"></div>
+        </div>
+        <div class="spot reveal" style="--i:4" id="uselessSpot">
+          <p class="spot-q">ما مشكلة هذا الجواب؟</p>
+          <div class="spot-opts list" id="uselessOpts">
+            <button data-v="vague" disabled>كلام عام مكرر بلا شرح</button>
+            <button data-v="short" disabled>قصير جدًا</button>
+            <button data-v="lang" disabled>مكتوب بالعربية</button>
+          </div>
+          <p class="spot-msg" id="uselessMsg">انتظر الجواب…</p>
+          <div class="spot-tip" hidden id="uselessTip"><svg class="ico"><use href="#i-warning"/></svg> <span>جواب يبدو مطمئنًا… لكنه لا يذكر مكوّنًا واحدًا ولا مثالًا.</span></div>
+          <div class="spot-fix" id="uselessFix" hidden>
+            <b>الطلب الأفضل</b>
+            <p>«أنت معلم أحياء مبسّط. اشرح الغشاء والنواة والسيتوبلازم والميتوكوندريا بمثال من الحياة، ثم اختبرني بسؤال.»</p>
+          </div>
         </div>
       </div>
     </div>
@@ -702,7 +737,7 @@
 <nav class="deck-nav" aria-label="التنقل بين الشرائح">
   <button class="nav-btn" id="prevBtn" aria-label="الشريحة السابقة"><svg class="ico"><use href="#i-arrow-right"/></svg><span>السابق</span></button>
   <div class="nav-center">
-    <span id="navCounter">١ من ١٦</span>
+    <span id="navCounter">١ من ١٧</span>
     <div class="nav-dots" id="navDots"></div>
   </div>
   <button class="nav-btn nav-next" id="nextBtn" aria-label="الشريحة التالية"><span>التالي</span><svg class="ico"><use href="#i-arrow-left"/></svg></button>
@@ -720,7 +755,7 @@
 <div class="toast" id="toast" role="status"></div>
 <div class="confetti" id="confetti" aria-hidden="true"></div>
 
-<script src="app.js"></script>
-<script src="demos.js"></script>
+<script src="app.js?v=5"></script>
+<script src="demos.js?v=5"></script>
 </body>
 </html>

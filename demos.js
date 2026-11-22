@@ -59,7 +59,24 @@
   }
 
   function fmtMath(s) {
-    return String(s).replace('٣/٤ + ١/٢', '<span class="math-inline" dir="ltr">٣/٤ + ١/٢</span>');
+    return String(s).replace('٣/٤ + ١/٢', calcHTML('٣/٤ + ١/٢'));
+  }
+
+  /* Formula layout that keeps Arabic-Indic digits in the right order:
+     each number/operator is its own flex item, so bidi cannot reorder it. */
+  function calcTokens(s) {
+    return String(s).split(/\s+/).map(function (t) {
+      if (/^[٠-٩]+$/.test(t)) return '<b>' + t + '</b>';
+      if (/^[٠-٩]+\/[٠-٩]+$/.test(t)) {
+        var p = t.split('/');
+        return '<span class="frac"><b>' + p[0] + '</b><b>' + p[1] + '</b></span>';
+      }
+      if (/^[+\-=×÷←→]+$/.test(t)) return '<i>' + t + '</i>';
+      return '<span class="calc-w">' + t + '</span>';
+    }).join('');
+  }
+  function calcHTML(s) {
+    return '<span class="calc" dir="ltr">' + calcTokens(s) + '</span>';
   }
 
   /* ==========================================================
@@ -200,10 +217,11 @@
   }
 
   /* ==========================================================
-     4 — AI MISTAKE
+     4 — WRONG ANSWER (confidently detailed)
      ========================================================== */
-  var MISTAKE_PROMPT = 'ما ناتج ٧ × ٨؟';
+  var MISTAKE_PROMPT = 'كيف أجمع ٣/٤ + ١/٢؟ اشرح بخطوات.';
   var mistakeAwarded = false;
+
   function mistakeReset() {
     mistakeAwarded = false;
     var body = $('#mistakeBody');
@@ -214,27 +232,37 @@
       b.classList.remove('is-right', 'is-wrong');
     });
     var msg = $('#mistakeMsg');
-    msg.textContent = 'انتظر الجواب…';
+    msg.textContent = 'انتظر الحل…';
     msg.classList.remove('good');
     $('#mistakeTip').hidden = true;
   }
+
   async function playMistake(t) {
     var body = $('#mistakeBody');
     await sleep(350);
     if (!alive(t)) return;
-    await typeUser(body, MISTAKE_PROMPT, t, 45);
+    await typeUser(body, MISTAKE_PROMPT, t, 34);
     if (!alive(t)) return;
-    await think(body, 900, t);
+    await think(body, 950, t);
     if (!alive(t)) return;
-    var b = addBubble(body, 'ai', '<span dir="ltr">٧ × ٨ = <b class="bad-answer" id="badAnswer">٥٤</b></span>');
+    var html =
+      '<span class="ai-claim">أكيد! الخطوات بسيطة:</span>' +
+      '<ol class="steps">' +
+        '<li>اجمع البسطين: ' + calcHTML('٣ + ١ = ٤') + '.</li>' +
+        '<li id="badStep">اجمع المقامين: ' + calcHTML('٤ + ٢ = ٦') + '.</li>' +
+        '<li>النتيجة ' + calcHTML('٤/٦') + '، وبالتبسيط ' + calcHTML('٢/٣') + '.</li>' +
+      '</ol>' +
+      '<p class="ai-final">إذن ' + calcHTML('٣/٤ + ١/٢ = ٢/٣') + '.</p>';
+    var b = addBubble(body, 'ai', html);
     var tag = document.createElement('small');
     tag.className = 'confident';
-    tag.innerHTML = 'ثقة عالية · إجابة فورية';
+    tag.innerHTML = 'إجابة مفصّلة · ثقة عالية';
     b.appendChild(tag);
     body.scrollTop = body.scrollHeight;
     $$('#mistakeOpts button').forEach(function (x) { x.disabled = false; });
     $('#mistakeMsg').textContent = 'الآن… أين الخطأ؟';
   }
+
   function initMistake(t) {
     mistakeReset();
     var opts = $('#mistakeOpts');
@@ -244,28 +272,125 @@
         var b = e.target.closest('button');
         if (!b || b.disabled) return;
         var msg = $('#mistakeMsg');
-        if (b.dataset.v === '56') {
+        var body = $('#mistakeBody');
+        if (b.dataset.v === 'den') {
           b.classList.add('is-right');
           $$('#mistakeOpts button').forEach(function (x) { x.disabled = true; });
-          var bad = $('#badAnswer');
-          if (bad) { bad.style.textDecoration = 'line-through'; bad.style.color = 'var(--red-dark)'; }
-          msg.textContent = 'صحيح! ٧ × ٨ = ٥٦. الجواب السابق كان خاطئًا… رغم ثقته.';
+          var bad = $('#badStep');
+          if (bad) bad.classList.add('is-bad');
+          var warn = addBubble(body, 'ai',
+            '<b>توقّف!</b> هذه الإجابة خاطئة. المقامات لا تُجمع؛ نوحّدها أولًا:<br>' +
+            calcHTML('١/٢ = ٢/٤') + '<br>' +
+            calcHTML('٣/٤ + ٢/٤ = ٥/٤ = ١ و ١/٤')
+          );
+          warn.classList.add('warn');
+          msg.innerHTML = 'أحسنت! الخطأ في الخطوة الثانية. الجواب الصحيح <span class="math-inline" dir="ltr">٥/٤</span>.';
           msg.classList.add('good');
           $('#mistakeTip').hidden = false;
           if (!mistakeAwarded) {
             mistakeAwarded = true;
             Deck.addXP(10, 'اكتشفت الخطأ');
+            if (window.innerWidth > 720) Deck.confetti(26);
           }
-          if (window.innerWidth > 720) Deck.confetti(26);
+        } else if (b.dataset.v === 'num') {
+          b.classList.add('is-wrong');
+          b.disabled = true;
+          msg.innerHTML = 'جمع البسطين صحيح: ' + calcHTML('٣ + ١ = ٤') + '. ركّز في الخطوة التالية.';
+          msg.classList.remove('good');
         } else {
           b.classList.add('is-wrong');
           b.disabled = true;
-          msg.textContent = 'ليست هذه… أعد الحساب بهدوء.';
+          msg.innerHTML = 'التبسيط صحيح أيضًا: ' + calcHTML('٤/٦ = ٢/٣') + '. الخطأ في طريقة الجمع نفسها.';
           msg.classList.remove('good');
         }
       });
     }
     playMistake(t);
+  }
+
+  /* ==========================================================
+     5 — USELESS ANSWER
+     ========================================================== */
+  var USELESS_PROMPT = 'اشرح لي الخلية بمستوى الصف السابع.';
+  var uselessAwarded = false;
+
+  function uselessReset() {
+    uselessAwarded = false;
+    var body = $('#uselessBody');
+    if (!body) return;
+    body.innerHTML = '';
+    $$('#uselessOpts button').forEach(function (b) {
+      b.disabled = true;
+      b.classList.remove('is-right', 'is-wrong');
+    });
+    var msg = $('#uselessMsg');
+    msg.textContent = 'انتظر الجواب…';
+    msg.classList.remove('good');
+    $('#uselessTip').hidden = true;
+    $('#uselessFix').hidden = true;
+  }
+
+  async function playUseless(t) {
+    var body = $('#uselessBody');
+    await sleep(350);
+    if (!alive(t)) return;
+    await typeUser(body, USELESS_PROMPT, t, 40);
+    if (!alive(t)) return;
+    await think(body, 950, t);
+    if (!alive(t)) return;
+    var html =
+      '<p>الخلية <span class="vague-mark">موضوع مهم جدًا</span> في الأحياء. هي <span class="vague-mark">أساس الحياة</span>، وتوجد في كل الكائنات الحية، ولها أجزاء كثيرة ومتنوعة.</p>' +
+      '<p>ويجب الاهتمام بدراستها؛ لأنها تفسر الحياة. الخلية <span class="vague-mark">مهمة جدًا</span>.</p>';
+    var b = addBubble(body, 'ai', html);
+    b.classList.add('is-vague');
+    var tag = document.createElement('small');
+    tag.className = 'confident';
+    tag.innerHTML = 'إجابة سريعة · بلا تفاصيل';
+    b.appendChild(tag);
+    body.scrollTop = body.scrollHeight;
+    $$('#uselessOpts button').forEach(function (x) { x.disabled = false; });
+    $('#uselessMsg').textContent = 'الآن… ما الخلل؟';
+  }
+
+  function initUseless(t) {
+    uselessReset();
+    var opts = $('#uselessOpts');
+    if (!opts.dataset.bound) {
+      opts.dataset.bound = '1';
+      opts.addEventListener('click', function (e) {
+        var b = e.target.closest('button');
+        if (!b || b.disabled) return;
+        var msg = $('#uselessMsg');
+        if (b.dataset.v === 'vague') {
+          b.classList.add('is-right');
+          $$('#uselessOpts button').forEach(function (x) { x.disabled = true; });
+          var warn = addBubble($('#uselessBody'), 'ai',
+            'هذا الجواب <b>لا يشرح</b>: لا يذكر الغشاء ولا النواة ولا السيتوبلازم ولا الميتوكوندريا، ولا يعطي مثالًا، ولا يسألك سؤالًا.'
+          );
+          warn.classList.add('warn');
+          msg.textContent = 'بالضبط! كلام عام… بلا مكوّنات ولا مثال.';
+          msg.classList.add('good');
+          $('#uselessTip').hidden = false;
+          $('#uselessFix').hidden = false;
+          if (!uselessAwarded) {
+            uselessAwarded = true;
+            Deck.addXP(10, 'فرّقت الجواب المفيد');
+            if (window.innerWidth > 720) Deck.confetti(26);
+          }
+        } else if (b.dataset.v === 'short') {
+          b.classList.add('is-wrong');
+          b.disabled = true;
+          msg.textContent = 'الجواب ليس قصيرًا… لكنه فارغ من التفاصيل.';
+          msg.classList.remove('good');
+        } else {
+          b.classList.add('is-wrong');
+          b.disabled = true;
+          msg.textContent = 'اللغة ليست المشكلة؛ المشكلة غياب الشرح.';
+          msg.classList.remove('good');
+        }
+      });
+    }
+    playUseless(t);
   }
 
   /* ==========================================================
@@ -404,8 +529,8 @@
           addBubble(chat, 'ai',
             'ممتاز، الطلب واضح. لنبدأ بتلميحات:<br>' +
             '١) المقام المشترك للعددين ٤ و٢ هو ٤.<br>' +
-            '٢) حوّل <span class="math-inline" dir="ltr">١/٢</span> إلى <span class="math-inline" dir="ltr">٢/٤</span>.<br>' +
-            '٣) الآن اجمع <span class="math-inline" dir="ltr">٣/٤ + ٢/٤</span> بنفسك.<br>' +
+            '٢) حوّل ' + calcHTML('١/٢') + ' إلى ' + calcHTML('٢/٤') + '.<br>' +
+            '٣) الآن اجمع ' + calcHTML('٣/٤ + ٢/٤') + ' بنفسك.<br>' +
             'أنا لن أكمل بدلًا عنك… لأنك طلبت ذلك.'
           );
           $('#buildHint').textContent = 'الطلب الكامل = إجابة دقيقة وخطوات واضحة.';
@@ -445,17 +570,17 @@
       hint: 'فكّر في المضاعفات: ٤، ٨، ١٢… و٢، ٤، ٦…'
     },
     {
-      q: 'حوّل <span class="math-inline" dir="ltr">١/٢</span> إلى كسر مقامه ٤. كم يصبح؟',
+      q: 'حوّل ' + calcHTML('١/٢') + ' إلى كسر مقامه ٤. كم يصبح؟',
       opts: ['١/٤', '٢/٤', '٣/٤'],
       right: '٢/٤',
-      ok: 'أحسنت! <span class="math-inline" dir="ltr">١/٢ = ٢/٤</span> لأن البسط والمقام ضُربا في ٢.',
+      ok: 'أحسنت! ' + calcHTML('١/٢ = ٢/٤') + ' لأن البسط والمقام ضُربا في ٢.',
       hint: 'اضرب البسط والمقام في العدد نفسه.'
     },
     {
-      q: 'الآن اجمع: <span class="math-inline" dir="ltr">٣/٤ + ٢/٤</span> = ؟',
+      q: 'الآن اجمع: ' + calcHTML('٣/٤ + ٢/٤') + ' = ؟',
       opts: ['٥/٤', '٥/٨', '٦/٤'],
       right: '٥/٤',
-      ok: 'ممتاز! <span class="math-inline" dir="ltr">٥/٤ = ١ و١/٤</span>. وصلت بنفسك… وهذا هو الهدف.',
+      ok: 'ممتاز! ' + calcHTML('٥/٤ = ١ و ١/٤') + '. وصلت بنفسك… وهذا هو الهدف.',
       hint: 'المقام يبقى ٤… واجمع البسطين فقط.'
     }
   ];
@@ -749,7 +874,7 @@
     $$('#inputModes .mode').forEach(function (b) { b.classList.toggle('is-on', b.dataset.mode === mode); });
     var p = $('.paper-math');
     if (mode === 'text') {
-      p.innerHTML = '<span dir="ltr" style="font-size:.62em;color:#1c86c9">٣/٤ + ١/٢ = ؟</span>';
+      p.innerHTML = calcHTML('٣/٤ + ١/٢ = ؟');
     } else {
       p.innerHTML = '<span class="frac"><b>٣</b><b>٤</b></span> + <span class="frac"><b>١</b><b>٢</b></span> = ؟';
     }
@@ -785,11 +910,11 @@
         await think(chat, 850, t);
         if (!alive(t)) { send.disabled = false; return; }
         if (mode === 'clear') {
-          addBubble(chat, 'ai', 'أرى المسألة بوضوح: <span class="math-inline" dir="ltr">٣/٤ + ١/٢</span>. الصورة حادة والإضاءة جيدة… هل نبدأ بتوحيد المقامات؟');
+          addBubble(chat, 'ai', 'أرى المسألة بوضوح: ' + calcHTML('٣/٤ + ١/٢') + '. الصورة حادة والإضاءة جيدة… هل نبدأ بتوحيد المقامات؟');
         } else if (mode === 'blur') {
           addBubble(chat, 'ai', 'الصورة غير واضحة… هل المقام ٢ أم ٣؟ لا أستطيع قراءة الأرقام بدقة. أعد التصوير بإضاءة أفضل، أو أرسل النص.');
         } else {
-          addBubble(chat, 'ai', 'النص واضح تمامًا: <span class="math-inline" dir="ltr">٣/٤ + ١/٢</span>. النص أدق من الصورة، لأنني أقرؤه مباشرة بلا أخطاء.');
+          addBubble(chat, 'ai', 'النص واضح تمامًا: ' + calcHTML('٣/٤ + ١/٢') + '. النص أدق من الصورة، لأنني أقرؤه مباشرة بلا أخطاء.');
         }
         if (!inputSeen.has(mode)) {
           inputSeen.add(mode);
@@ -934,6 +1059,7 @@
     'how-learns': initLearn,
     'is-it-ai': initIQ,
     'ai-mistake': initMistake,
+    'ai-useless': initUseless,
     'rules': initRules,
     'recipe': initRecipe,
     'builder': initBuilder,
