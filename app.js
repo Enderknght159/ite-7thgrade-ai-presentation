@@ -121,7 +121,7 @@
       active.classList.add('is-active');
     }
 
-    history.replaceState(null, '', '#' + slides[index].dataset.key);
+    try { history.replaceState(null, '', '#' + slides[index].dataset.key); } catch (err) { /* file:// may refuse */ }
     document.dispatchEvent(new CustomEvent('slide:enter', {
       detail: { key: slides[index].dataset.key, index: index, from: fromKey }
     }));
