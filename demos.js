@@ -42,13 +42,19 @@
   async function typeUser(body, text, t, speed) {
     var b = addBubble(body, 'user', '');
     b.classList.add('prompt');
+    var node = document.createTextNode('');
+    var caret = document.createElement('span');
+    caret.className = 'stream-cursor';
+    b.appendChild(node);
+    b.appendChild(caret);
     var step = speed || 14;
     for (var i = 0; i < text.length; i++) {
-      if (!alive(t)) return null;
-      b.textContent += text.charAt(i);
+      if (!alive(t)) { caret.remove(); return null; }
+      node.nodeValue += text.charAt(i);
       body.scrollTop = body.scrollHeight;
       await sleep(step);
     }
+    caret.remove();
     return b;
   }
 
