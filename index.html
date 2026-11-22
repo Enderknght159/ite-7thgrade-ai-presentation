@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>الذكاء الاصطناعي — الصف السابع</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="slides.css">
+</head>
+<body>
+
+<svg class="sprite" aria-hidden="true">
+  <defs>
+    <linearGradient id="g-bot" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#89e219"/><stop offset="1" stop-color="#58cc02"/>
+    </linearGradient>
+    <linearGradient id="g-ai" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8b6bff"/><stop offset="1" stop-color="#1cb0f6"/>
+    </linearGradient>
+  </defs>
+  <symbol id="i-brain" viewBox="0 0 24 24"><path d="M9.5 4a3 3 0 0 0-3 3 3 3 0 0 0-1.5 5.4A3 3 0 0 0 6 18a3 3 0 0 0 3.5 2.5V4z"/><path d="M14.5 4a3 3 0 0 1 3 3 3 3 0 0 1 1.5 5.4A3 3 0 0 1 18 18a3 3 0 0 1-3.5 2.5V4z"/><path d="M9 9h.01M15 9h.01M9 15h.01M15 15h.01"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3l2.7 5.5 6.1.9-4.4 4.3 1 6-5.4-2.8-5.4 2.8 1-6-4.4-4.3 6.1-.9L12 3z"/></symbol>
+  <symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="3"/><path d="M8.5 7h7M8.5 12h.01M12 12h.01M15.5 12h.01M8.5 16h.01M12 16h.01M15.5 16h.01"/></symbol>
+  <symbol id="i-translate" viewBox="0 0 24 24"><path d="M3 5h9M7.5 5c0 5-2 8-4.5 10M5 9c1.5 3 3.5 5 6 6"/><path d="M13 21l4-10 4 10M14.5 17h5"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></symbol>
+  <symbol id="i-mask" viewBox="0 0 24 24"><path d="M4 5c5 2 11 2 16 0v6c0 4-3.5 7-8 9-4.5-2-8-5-8-9V5z"/><path d="M8 10h.01M16 10h.01M9 14c2 1.5 4 1.5 6 0"/></symbol>
+  <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M8 21h8"/></symbol>
+  <symbol id="i-reco" viewBox="0 0 24 24"><rect x="2.5" y="4" width="19" height="16" rx="4"/><path d="M10 8.5l5 3.5-5 3.5v-7z"/></symbol>
+  <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="2"/><path d="M4 18l5-5 4 4 3-3 4 4"/></symbol>
+  <symbol id="i-text" viewBox="0 0 24 24"><path d="M5 6h14M12 6v13M8 19h8"/></symbol>
+  <symbol id="i-sound" viewBox="0 0 24 24"><path d="M4 10v4h4l5 4V6L8 10H4z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/></symbol>
+  <symbol id="i-number" viewBox="0 0 24 24"><path d="M8 4L6 20M16 4l-2 16M4 9h16M3 15h16"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/><path d="M9 12l2 2 4-4"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M8 14a6 6 0 1 1 8 0c-1 1-1.5 2-1.5 3h-5c0-1-.5-2-1.5-3z"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M21 3L10 14M21 3l-7 18-4-7-7-4 18-7z"/></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24"><path d="M3 8a2 2 0 0 1 2-2h2l2-2h6l2 2h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z"/><circle cx="12" cy="13" r="4"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5a3 3 0 0 1 3-2h13v18H7a3 3 0 0 0-3 2V5z"/><path d="M4 19a3 3 0 0 1 3-2h13"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 13.7-5.7L20 8M20 4v4h-4M20 12a8 8 0 0 1-13.7 5.7L4 16M4 20v-4h4"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></symbol>
+  <symbol id="i-expand" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></symbol>
+  <symbol id="i-warning" viewBox="0 0 24 24"><path d="M12 3L2 21h20L12 3z"/><path d="M12 9v5M12 17h.01"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4V5z"/><path d="M8 8h8M8 12h5"/></symbol>
+  <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0V4z"/><path d="M8 5H4v2a4 4 0 0 0 4 4M16 5h4v2a4 4 0 0 1-4 4M12 13v5M8 21h8M9 18h6"/></symbol>
+  <symbol id="i-hand" viewBox="0 0 24 24"><path d="M8 12V5a1.5 1.5 0 0 1 3 0v5M11 10V4a1.5 1.5 0 0 1 3 0v6M14 10V5a1.5 1.5 0 0 1 3 0v7"/><path d="M17 8a1.5 1.5 0 0 1 3 0v6c0 4-3 7-7 7h-1c-2 0-3-1-4-2.5L4 14a1.7 1.7 0 0 1 2.7-2l1.3 2"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3L2 8l10 5 10-5-10-5z"/><path d="M2 12l10 5 10-5M2 16l10 5 10-5"/></symbol>
+  <symbol id="i-flask" viewBox="0 0 24 24"><path d="M9 3h6M10 3v6L4 19a2 2 0 0 0 1.8 3h12.4A2 2 0 0 0 20 19l-6-10V3"/><path d="M7.5 15h9"/></symbol>
+  <symbol id="i-cat" viewBox="0 0 24 24"><path d="M5 9L4 4l5 3h6l5-3-1 5v6a6 6 0 0 1-6 6h-2a6 6 0 0 1-6-6V9z"/><path d="M9 12h.01M15 12h.01M10 16h4"/><path d="M2 11h3M19 11h3"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21S3 15 3 9a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-9 12-9 12z"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11L12 3l9 8M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></symbol>
+  <symbol id="robot" viewBox="0 0 220 240">
+    <ellipse cx="110" cy="226" rx="58" ry="9" fill="#000" opacity=".08"/>
+    <path d="M110 28V16" stroke="#7aa7b5" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="110" cy="12" r="8" fill="#ffc800"/>
+    <rect x="44" y="30" width="132" height="104" rx="42" fill="#f2fbff" stroke="#bde6f7" stroke-width="4"/>
+    <rect x="62" y="50" width="96" height="64" rx="26" fill="#263942"/>
+    <circle cx="92" cy="78" r="7" fill="#89e219"/><circle cx="128" cy="78" r="7" fill="#89e219"/>
+    <path d="M98 94c8 6 16 6 24 0" stroke="#89e219" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <circle cx="44" cy="82" r="10" fill="#58cc02"/><circle cx="176" cy="82" r="10" fill="#58cc02"/>
+    <rect x="62" y="146" width="96" height="62" rx="26" fill="url(#g-bot)"/>
+    <rect x="82" y="160" width="56" height="26" rx="10" fill="#d7ffb8"/>
+    <path d="M88 173h8M104 173h6M116 173h8" stroke="#46a302" stroke-width="4" stroke-linecap="round"/>
+    <path d="M62 160c-10 2-18 10-18 22M158 160c10 2 18 10 18 22" stroke="#58cc02" stroke-width="10" stroke-linecap="round" fill="none"/>
+    <circle cx="42" cy="186" r="8" fill="#58cc02"/><circle cx="178" cy="186" r="8" fill="#58cc02"/>
+  </symbol>
+</svg>
+
+<div class="bg-decor" aria-hidden="true">
+  <span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span>
+  <span class="dots"></span>
+  <div class="floaters">
+    <svg class="ico f1"><use href="#i-spark"/></svg>
+    <svg class="ico f2"><use href="#i-star"/></svg>
+    <svg class="ico f3"><use href="#i-brain"/></svg>
+    <svg class="ico f4"><use href="#i-spark"/></svg>
+  </div>
+</div>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark"><svg class="ico"><use href="#i-brain"/></svg></div>
+    <div class="brand-text">
+      <strong>مختبر الذكاء</strong>
+      <span>الصف السابع · الوحدة الرابعة</span>
+    </div>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div><span class="progress-star"><svg class="ico"><use href="#i-star"/></svg></span></div>
+    <span class="progress-label" id="progressLabel">١ من ١٦</span>
+  </div>
+  <div class="top-actions">
+    <div class="xp-pill" id="xpPill" title="نقاط الخبرة"><svg class="ico"><use href="#i-spark"/></svg><span id="xpValue">0</span><small>XP</small></div>
+    <button class="icon-btn" id="menuBtn" aria-label="فهرس الشرائح" title="فهرس الشرائح"><svg class="ico"><use href="#i-menu"/></svg></button>
+    <button class="icon-btn" id="fullscreenBtn" aria-label="ملء الشاشة" title="ملء الشاشة"><svg class="ico"><use href="#i-expand"/></svg></button>
+  </div>
+</header>
+
+<main class="deck" id="deck">
+
+  <!-- 1 — الغلاف -->
+  <section class="slide is-active" data-key="cover" data-title="البداية" data-unit="مقدمة">
+    <div class="wrap cover">
+      <div class="cover-copy">
+        <span class="kicker reveal" style="--i:0"><svg class="ico"><use href="#i-spark"/></svg> الوحدة الرابعة · تكنولوجيا المعلومات</span>
+        <h1 class="reveal" style="--i:1">الذكاء <span class="grad">الاصطناعي</span></h1>
+        <p class="lead reveal" style="--i:2">كيف يتعلّم من الأمثلة؟ وكيف نستخدمه لنفهم… لا ليفكّر بدلًا عنّا؟</p>
+        <div class="actions reveal" style="--i:3">
+          <button class="btn btn-primary btn-lg" data-goto="roadmap">هيا نبدأ <svg class="ico"><use href="#i-arrow-left"/></svg></button>
+          <button class="btn btn-ghost btn-lg" data-goto="sim-math"><svg class="ico"><use href="#i-chat"/></svg> جرّب محادثة AI</button>
+        </div>
+        <div class="cover-chips reveal" style="--i:4">
+          <span><svg class="ico"><use href="#i-play"/></svg> تحدّيات</span>
+          <span><svg class="ico"><use href="#i-chat"/></svg> محادثات</span>
+          <span><svg class="ico"><use href="#i-trophy"/></svg> نقاط XP</span>
+        </div>
+      </div>
+      <div class="cover-art reveal" style="--i:2">
+        <div class="bot-stage">
+          <div class="orbit"><span class="orb o1"><svg class="ico"><use href="#i-image"/></svg></span><span class="orb o2"><svg class="ico"><use href="#i-text"/></svg></span><span class="orb o3"><svg class="ico"><use href="#i-sound"/></svg></span><span class="orb o4"><svg class="ico"><use href="#i-number"/></svg></span></div>
+          <svg class="mascot bot" viewBox="0 0 220 240"><use href="#robot"/></svg>
+          <div class="bubble">أهلًا! هل تعلّمتَ شيئًا جديدًا اليوم؟</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 — خريطة الرحلة -->
+  <section class="slide" data-key="roadmap" data-title="خريطة الرحلة" data-unit="مقدمة">
+    <div class="wrap">
+      <header class="head">
+        <span class="kicker reveal" style="--i:0"><svg class="ico"><use href="#i-layers"/></svg> خريطة الرحلة</span>
+        <h2 class="reveal" style="--i:1">أربع محطات… عقل واحد</h2>
+        <p class="reveal" style="--i:2">اضغط أي محطة لتبدأ منها.</p>
+      </header>
+      <div class="map">
+        <button class="stop reveal" style="--i:3;--c:#58cc02" data-goto="what-is-ai">
+          <span class="stop-num">١</span>
+          <span class="stop-ico"><svg class="ico"><use href="#i-brain"/></svg></span>
+          <strong>ما هو؟</strong><small>يتعلّم من الأمثلة.</small>
+          <span class="stop-go"><svg class="ico"><use href="#i-arrow-left"/></svg></span>
+        </button>
+        <button class="stop reveal" style="--i:4;--c:#1cb0f6" data-goto="how-learns">
+          <span class="stop-num">٢</span>
+          <span class="stop-ico"><svg class="ico"><use href="#i-refresh"/></svg></span>
+          <strong>كيف يتعلّم؟</strong><small>أربع خطوات.</small>
+          <span class="stop-go"><svg class="ico"><use href="#i-arrow-left"/></svg></span>
+        </button>
+        <button class="stop reveal" style="--i:5;--c:#ce82ff" data-goto="is-it-ai">
+          <span class="stop-num">٣</span>
+          <span class="stop-ico"><svg class="ico"><use href="#i-target"/></svg></span>
+          <strong>هل هذا AI؟</strong><small>لعبة التصنيف.</small>
+          <span class="stop-go"><svg class="ico"><use href="#i-arrow-left"/></svg></span>
+        </button>
+        <button class="stop reveal" style="--i:6;--c:#ff9600" data-goto="recipe">
+          <span class="stop-num">٤</span>
+          <span class="stop-ico"><svg class="ico"><use href="#i-chat"/></svg></span>
+          <strong>مساعدي في الدراسة</strong><small>الطلب الجيد والمحاكاة.</small>
+          <span class="stop-go"><svg class="ico"><use href="#i-arrow-left"/></svg></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 — ما هو الذكاء الاصطناعي -->
+  <section class="slide" data-key="what-is-ai" data-title="ما هو الذكاء الاصطناعي؟" data-unit="المحطة الأولى">
+    <div class="wrap">
+      <header class="head tight">
+        <span class="kicker reveal" style="--i:0">المحطة الأولى</span>
+        <h2 class="reveal" style="--i:1">برنامج <span class="hl">يتعلّم</span>… ثم ينفّذ</h2>
+        <p class="reveal" style="--i:2">نظام حاسوبي يتعلّم من أمثلة كثيرة، يلاحظ الأنماط، ثم ينفّذ مهامًا تشبه قدرات الإنسان.</p>
+      </header>
+      <div class="compare">
+        <article class="cmp reveal" style="--i:3">
+          <header><span class="cmp-ico gray"><svg class="ico"><use href="#i-calc"/></svg></span><strong>آلة حاسبة</strong></header>
+          <div class="calc-screen" dir="ltr">٧ × ٨ = <b>٥٦</b></div>
+          <p>تنفّذ عملية ثابتة… لا تتعلّم شيئًا جديدًا.</p>
+          <span class="tag no"><svg class="ico"><use href="#i-x"/></svg> ليست ذكاءً اصطناعيًا</span>
+        </article>
+        <article class="cmp cmp-ai reveal" style="--i:4">
+          <header><span class="cmp-ico violet"><svg class="ico"><use href="#i-image"/></svg></span><strong>تعرّف على الصور</strong></header>
+          <div class="mini-lab">
+            <div class="ex-row" id="catExamples">
+              <span class="ex"><svg class="ico"><use href="#i-cat"/></svg><i>١</i></span>
+              <span class="ex"><svg class="ico"><use href="#i-cat"/></svg><i>٢</i></span>
+              <span class="ex"><svg class="ico"><use href="#i-cat"/></svg><i>٣</i></span>
+            </div>
+            <button class="btn btn-blue btn-sm" id="catBtn"><svg class="ico"><use href="#i-spark"/></svg> جرّب صورة جديدة</button>
+            <div class="cat-new" id="catNew">
+              <svg class="ico"><use href="#i-cat"/></svg>
+              <span class="scan"></span>
+              <span class="cat-answer" id="catAnswer">؟</span>
+            </div>
+          </div>
+          <span class="tag yes"><svg class="ico"><use href="#i-check"/></svg> تعلّمت من الأمثلة</span>
+        </article>
+      </div>
+      <p class="note reveal" style="--i:5"><svg class="ico"><use href="#i-bulb"/></svg> الترجمة، والتوصيات، والمساعد الصوتي… كلها تبدأ من أمثلة كثيرة.</p>
+    </div>
+  </section>
+
+  <!-- 4 — كيف يتعلّم -->
+  <section class="slide" data-key="how-learns" data-title="كيف يتعلّم؟" data-unit="المحطة الأولى">
+    <div class="wrap">
+      <header class="head tight">
+        <span class="kicker reveal" style="--i:0">أربع خطوات</span>
+        <h2 class="reveal" style="--i:1">من الأمثلة… إلى الإتقان</h2>
+        <p class="reveal" style="--i:2">اضغط أي خطوة، أو شغّل الرحلة كاملة.</p>
+      </header>
+
+      <div class="learn-shell reveal" style="--i:3">
+        <div class="learn-rail" id="learnRail">
+          <button class="learn-tab is-on" data-step="1"><b>١</b><span>جمع الأمثلة</span></button>
+          <button class="learn-tab" data-step="2"><b>٢</b><span>ملاحظة الأنماط</span></button>
+          <button class="learn-tab" data-step="3"><b>٣</b><span>المحاولة والتصحيح</span></button>
+          <button class="learn-tab" data-step="4"><b>٤</b><span>الاستخدام</span></button>
+          <span class="learn-progress" id="learnProgress"></span>
+        </div>
+
+        <div class="learn-stage" id="learnStage">
+          <div class="stage-pane is-on" data-pane="1">
+            <div class="data-rain">
+              <span><svg class="ico"><use href="#i-image"/></svg></span>
+              <span><svg class="ico"><use href="#i-text"/></svg></span>
+              <span><svg class="ico"><use href="#i-sound"/></svg></span>
+              <span><svg class="ico"><use href="#i-number"/></svg></span>
+              <span><svg class="ico"><use href="#i-image"/></svg></span>
+              <span><svg class="ico"><use href="#i-text"/></svg></span>
+              <span><svg class="ico"><use href="#i-sound"/></svg></span>
+              <span><svg class="ico"><use href="#i-number"/></svg></span>
+            </div>
+            <div class="data-box"><svg class="ico"><use href="#i-layers"/></svg><b>بيانات كثيرة</b></div>
+          </div>
+
+          <div class="stage-pane" data-pane="2">
+            <div class="pattern-row">
+              <span class="pat"><svg class="ico"><use href="#i-cat"/></svg><i class="dot d1"></i><i class="dot d2"></i></span>
+              <span class="pat"><svg class="ico"><use href="#i-cat"/></svg><i class="dot d1"></i><i class="dot d2"></i></span>
+              <span class="pat"><svg class="ico"><use href="#i-cat"/></svg><i class="dot d1"></i><i class="dot d2"></i></span>
+            </div>
+            <div class="pattern-tag"><svg class="ico"><use href="#i-eye"/></svg> القاسم المشترك: آذان · شوارب · شكل الوجه</div>
+          </div>
+
+          <div class="stage-pane" data-pane="3">
+            <div class="try-row"><span class="try-chip bad">كلب <svg class="ico"><use href="#i-x"/></svg></span><span class="try-arrow"><svg class="ico"><use href="#i-arrow-left"/></svg></span><span class="try-chip good">قطة <svg class="ico"><use href="#i-check"/></svg></span></div>
+            <div class="try-note">أخطأ… فصُحّح… فتحسّن.</div>
+          </div>
+
+          <div class="stage-pane" data-pane="4">
+            <div class="use-row">
+              <span class="use-img"><svg class="ico"><use href="#i-cat"/></svg><i class="use-scan"></i></span>
+              <span class="use-arrow"><svg class="ico"><use href="#i-arrow-left"/></svg></span>
+              <span class="use-result"><svg class="ico"><use href="#i-check"/></svg> قطة!</span>
+            </div>
+            <div class="try-note">مثال جديد… لم يره من قبل.</div>
+          </div>
+        </div>
+
+        <div class="learn-foot">
+          <p class="learn-line" id="learnLine">يُعطى النظام بيانات كثيرة: صور، ونصوص، وأصوات، وأرقام.</p>
+          <button class="btn btn-ghost btn-sm" id="learnPlay"><svg class="ico"><use href="#i-play"/></svg> شغّل الرحلة</button>
+        </div>
+      </div>
+
+      <p class="note reveal" style="--i:4"><svg class="ico"><use href="#i-brain"/></svg> يشبه طالبًا حلّ مسائل كثيرة… حتى فهم النمط، فأصبح يحلّ ما لم يره.</p>
+    </div>
+  </section>
+
+  <!-- 5 — هل هذا ذكاء اصطناعي -->
+  <section class="slide" data-key="is-it-ai" data-title="هل هذا ذكاء اصطناعي؟" data-unit="المحطة الثانية">
+    <div class="wrap">
+      <header class="head tight">
+        <span class="kicker reveal" style="--i:0">لعبة التصنيف</span>
+        <h2 class="reveal" style="--i:1">هل هذا <span class="grad">ذكاء اصطناعي</span>؟</h2>
+        <p class="reveal" style="--i:2">اضغط البطاقة… وقل رأيك قبل أن تنقلب.</p>
+      </header>
+      <div class="iq-grid" id="iqGrid">
+        <button class="iq reveal" style="--i:3" data-answer="no" data-why="تنفّذ عمليات حسابية ثابتة، ولا تتعلّم من الأمثلة.">
+          <span class="iq-face"><svg class="ico"><use href="#i-calc"/></svg><strong>الآلة الحاسبة</strong><small>اضغط للكشف</small></span>
+          <span class="iq-back no"><b>لا</b><em>عمليات ثابتة… بلا تعلّم.</em></span>
+        </button>
+        <button class="iq reveal" style="--i:4" data-answer="yes" data-why="تتعلّم من أمثلة لغوية كثيرة، وتترجم نصوصًا جديدة.">
+          <span class="iq-face"><svg class="ico"><use href="#i-translate"/></svg><strong>ترجمة جوجل</strong><small>اضغط للكشف</small></span>
+          <span class="iq-back yes"><b>نعم</b><em>تتعلّم من ملايين الأمثلة اللغوية.</em></span>
+        </button>
+        <button class="iq reveal" style="--i:5" data-answer="no" data-why="تعمل وفق وقت محدّد مسبقًا، ولا تتعلّم.">
+          <span class="iq-face"><svg class="ico"><use href="#i-clock"/></svg><strong>ساعة المنبّه</strong><small>اضغط للكشف</small></span>
+          <span class="iq-back no"><b>لا</b><em>وقت محدّد… فقط.</em></span>
+        </button>
+        <button class="iq reveal" style="--i:6" data-answer="yes" data-why="يتعرّف على الوجه ويضيف تأثيرًا بناءً على تحليل الصورة.">
+          <span class="iq-face"><svg class="ico"><use href="#i-mask"/></svg><strong>فلاتر سناب</strong><small>اضغط للكشف</small></span>
+          <span class="iq-back yes"><b>نعم</b><em>يتعرّف على الوجه ويحلّله.</em></span>
+        </button>
+        <button class="iq reveal" style="--i:7" data-answer="yes" data-why="يفهم الصوت، ويتعرّف على الكلام، ويجيب.">
+          <span class="iq-face"><svg class="ico"><use href="#i-mic"/></svg><strong>المساعد الصوتي</strong><small>اضغط للكشف</small></span>
+          <span class="iq-back yes"><b>نعم</b><em>يفهم الكلام ويجيب.</em></span>
+        </button>
+        <button class="iq reveal" style="--i:8" data-answer="yes" data-why="تحلّل ما تشاهده، وتقترح مقاطع مشابهة.">
+          <span class="iq-face"><svg class="ico"><use href="#i-reco"/></svg><strong>توصيات يوتيوب</strong><small>اضغط للكشف</small></span>
+          <span class="iq-back yes"><b>نعم</b><em>تتعلّم من مشاهداتك.</em></span>
+        </button>
+      </div>
+      <div class="iq-foot">
+        <span class="iq-count" id="iqCount">٠ من ٦</span>
+        <span class="iq-msg" id="iqMsg">اقلب البطاقات الست…</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 — قد يخطئ -->
+  <section class="slide" data-key="ai-mistake" data-title="حتى AI يخطئ" data-unit="المحطة الثانية">
+    <div class="wrap">
+      <header class="head tight">
+        <span class="kicker reveal" style="--i:0"><svg class="ico"><use href="#i-warning"/></svg> انتبه!</span>
+        <h2 class="reveal" style="--i:1">واثق… لكنه قد <span class="hl-red">يخطئ</span></h2>
+        <p class="reveal" style="--i:2">اقرأ الإجابة… ثم اكتشف الخطأ بنفسك.</p>
+      </header>
+      <div class="mistake-wrap">
+        <div class="chat-panel reveal" style="--i:3" id="mistakeChat">
+          <div class="chat-top">
+            <span class="ai-ava"><svg class="ico"><use href="#i-spark"/></svg></span>
+            <div><strong>مساعد ذكي</strong><small><i class="online"></i> متصل</small></div>
+            <span class="chat-badge">AI</span>
+          </div>
+          <div class="chat-body" id="mistakeBody"></div>
+        </div>
+        <div class="spot reveal" style="--i:4" id="mistakeSpot">
+          <p class="spot-q">أين الخطأ في الجواب؟</p>
+          <div class="spot-opts" id="mistakeOpts">
+            <button data-v="54" disabled>٥٤</button>
+            <button data-v="56" disabled>٥٦</button>
+            <button data-v="48" disabled>٤٨</button>
+          </div>
+          <p class="spot-msg" id="mistakeMsg">انتظر الجواب…</p>
+          <div class="spot-tip" hidden id="mistakeTip"><svg class="ico"><use href="#i-bulb"/></svg> الآلة واثقة… لكنها ليست معصومة. راجع دائمًا من الكتاب أو المعلم.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 — قواعد الاستخدام -->
+  <section class="slide" data-key="rules" data-title="قواعد الاستخدام" data-unit="المحطة الثانية">
+    <div class="wrap">
+      <header class="head tight">
+        <span class="kicker reveal" style="--i:0"><svg class="ico"><use href="#i-shield"/></svg> دستور الذكاء</span>
+        <h2 class="reveal" style="--i:1">ستّ قواعد… تحميك</h2>
+        <p class="reveal" style="--i:2">اضغط كل قاعدة لتقرأ التفصيل.</p>
+      </header>
+      <div class="rules" id="rules">
+        <button class="rule reveal" style="--i:3">
+          <span class="rule-ico red"><svg class="ico"><use href="#i-warning"/></svg></span>
+          <span class="rule-t"><strong>قد يخطئ</strong><em>لا تعتمد عليه دائمًا. راجع من الكتاب أو مصدر موثوق.</em></span>
+          <span class="rule-plus">+</span>
+        </button>
+        <button class="rule reveal" style="--i:4">
+          <span class="rule-ico blue"><svg class="ico"><use href="#i-lock"/></svg></span>
+          <span class="rule-t"><strong>لا تشارك معلوماتك</strong><em>لا اسم كامل، ولا عنوان، ولا هاتف، ولا كلمات مرور.</em></span>
+          <span class="rule-plus">+</span>
+        </button>
+        <button class="rule reveal" style="--i:5">
+          <span class="rule-ico red"><svg class="ico"><use href="#i-x"/></svg></span>
+          <span class="rule-t"><strong>لا تنسخ الواجب</strong><em>استخدمه ليفهّمك… لا ليحلّ بدلًا عنك.</em></span>
+          <span class="rule-plus">+</span>
+        </button>
+        <button class="rule reveal" style="--i:6">
+          <span class="rule-ico green"><svg class="ico"><use href="#i-bulb"/></svg></span>
+          <span class="rule-t"><strong>استخدمه ليفهّمك</strong><em>اطلب شرحًا، أو تلميحًا، أو مثالًا، أو أسئلة تدريب.</em></span>
+          <span class="rule-plus">+</span>
+        </button>
+        <button class="rule reveal" style="--i:7">
+          <span class="rule-ico yellow"><svg class="ico"><use href="#i-book"/></svg></span>
+          <span class="rule-t"><strong>راجع صحة المعلومات</strong><em>خصوصًا في المواد الدراسية… قبل الاعتماد عليها.</em></span>
+          <span class="rule-plus">+</span>
+        </button>
+        <button class="rule reveal" style="--i:8">
+          <span class="rule-ico violet"><svg class="ico"><use href="#i-image"/></svg></span>
+          <span class="rule-t"><strong>أدخل معلومات صحيحة</strong><em>صورة واضحة، ونص دقيق، ومعلومات كاملة.</em></span>
+          <span class="rule-plus">+</span>
+        </button>
+      </div>
+      <div class="iq-foot">
+        <span class="iq-count" id="rulesCount">٠ من ٦</span>
+        <span class="iq-msg" id="rulesMsg">افتح القواعد الست…</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 — فاصل الدرس الثاني -->
+  <section class="slide" data-key="lesson2" data-title="مساعدي في الدراسة" data-unit="المحطة الثالثة">
+    <div class="wrap unit">
+      <span class="unit-num reveal" style="--i:0">٢</span>
+      <div class="unit-copy">
+        <span class="kicker reveal" style="--i:1">الدرس الثاني</span>
+        <h2 class="reveal" style="--i:2">مساعدي في <span class="grad">الدراسة</span></h2>
+        <p class="reveal" style="--i:3">نفس الأداة… لكن <b>الطلب</b> يصنع الفرق.</p>
+        <button class="btn btn-primary btn-lg reveal" style="--i:4" data-goto="recipe">اكشف الوصفة <svg class="ico"><use href="#i-arrow-left"/></svg></button>
+      </div>
+      <div class="unit-art reveal" style="--i:2">
+        <div class="float-chat c1">اشرح لي…</div>
+        <div class="float-chat c2">بأي مستوى؟</div>
+        <div class="float-chat c3">خطوات… وبلا جواب نهائي.</div>
+        <span class="unit-spark"><svg class="ico"><use href="#i-spark"/></svg></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 — وصفة الطلب -->
+  <section class="slide" data-key="recipe" data-title="وصفة الطلب الجيد" data-unit="المحطة الثالثة">
+    <div class="wrap">
+      <header class="head tight">
+        <span class="kicker reveal" style="--i:0">ثمانية مكوّنات</span>
+        <h2 class="reveal" style="--i:1">وصفة <span class="grad">الطلب الجيد</span></h2>
+        <p class="reveal" style="--i:2">اضغط كل مكوّن… وابنِ وصفتك.</p>
+      </header>
+      <div class="recipe" id="recipe">
+        <button class="ing reveal" style="--i:3" data-name="الدور" data-ex="«أنت معلم صبور…»"><b>١</b><svg class="ico"><use href="#i-user"/></svg><strong>الدور</strong></button>
+        <button class="ing reveal" style="--i:4" data-name="المهمة" data-ex="«ساعدني في حل المسألة…»"><b>٢</b><svg class="ico"><use href="#i-target"/></svg><strong>المهمة</strong></button>
+        <button class="ing reveal" style="--i:5" data-name="الهدف" data-ex="«أريد أن أفهم… لا الجواب فقط.»"><b>٣</b><svg class="ico"><use href="#i-bulb"/></svg><strong>الهدف</strong></button>
+        <button class="ing reveal" style="--i:6" data-name="الجمهور والمستوى" data-ex="«اشرح بمستوى الصف السابع.»"><b>٤</b><svg class="ico"><use href="#i-hand"/></svg><strong>المستوى</strong></button>
+        <button class="ing reveal" style="--i:7" data-name="السياق" data-ex="«هذه المسألة… وهذا نص الدرس.»"><b>٥</b><svg class="ico"><use href="#i-layers"/></svg><strong>السياق</strong></button>
+        <button class="ing reveal" style="--i:8" data-name="الشكل المطلوب" data-ex="«اعرض النتيجة في خطوات.»"><b>٦</b><svg class="ico"><use href="#i-text"/></svg><strong>الشكل</strong></button>
+        <button class="ing reveal" style="--i:9" data-name="القيود" data-ex="«ولا تعطني الجواب النهائي.»"><b>٧</b><svg class="ico"><use href="#i-lock"/></svg><strong>القيود</strong></button>
+        <button class="ing reveal" style="--i:10" data-name="معايير المراجعة" data-ex="«سأراجع الخطوات من الكتاب.»"><b>٨</b><svg class="ico"><use href="#i-check"/></svg><strong>المراجعة</strong></button>
+      </div>
+      <div class="recipe-detail reveal" style="--i:11">
+        <div class="rd-empty" id="rdEmpty"><svg class="ico"><use href="#i-bulb"/></svg> اختر مكوّنًا لترى مثاله.</div>
+        <div class="rd-body" id="rdBody" hidden>
+          <span class="rd-name" id="rdName">الدور</span>
+          <span class="rd-ex" id="rdEx">«…»</span>
+        </div>
+        <span class="rd-count" id="rdCount">٠ من ٨</span>
+      </div>
+      <div class="recipe-full" id="recipeFull" hidden>
+        <p>«أنت معلم صبور، ساعدني في حل هذه المسألة بتلميحات، ولا تقدّم الجواب النهائي، واشرح بمستوى الصف السابع، واعرض النتيجة في خطوات.»</p>
+        <button class="btn btn-primary btn-sm" data-goto="builder">ابنِ طلبك بنفسك <svg class="ico"><use href="#i-arrow-left"/></svg></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 — بناء الطلب -->
+  <section class="slide" data-key="builder" data-title="ابنِ طلبك" data-unit="المحطة الثالثة">
+    <div class="wrap">
+      <header class="head tight">
+        <span class="kicker reveal" style="--i:0">مختبر الطلب</span>
+        <h2 class="reveal" style="--i:1">ابنِ طلبك… ثم أرسله</h2>
+        <p class="reveal" style="--i:2">اختر عناصر من اليمين، وشاهد الطلب يتكوّن. جرّب طلبًا ناقصًا أولًا!</p>
+      </header>
+      <div class="build">
+        <div class="build-side reveal" style="--i:3">
+          <div class="chips" id="buildChips">
+            <button class="bchip" data-frag="أنت معلم صبور،" data-label="الدور">الدور</button>
+            <button class="bchip" data-frag="ساعدني في حل مسألة جمع الكسور،" data-label="المهمة">المهمة</button>
+            <button class="bchip" data-frag="أريد أن أفهم الطريقة لا الجواب فقط،" data-label="الهدف">الهدف</button>
+            <button class="bchip" data-frag="اشرح بمستوى الصف السابع،" data-label="المستوى">المستوى</button>
+            <button class="bchip" data-frag="والمسألة: ٣/٤ + ١/٢،" data-label="السياق">السياق</button>
+            <button class="bchip" data-frag="واعرض الحل في خطوات،" data-label="الشكل">الشكل</button>
+            <button class="bchip" data-frag="ولا تعطني الجواب النهائي،" data-label="القيود">القيود</button>
+            <button class="bchip" data-frag="وسأراجع الخطوات من الكتاب." data-label="المراجعة">المراجعة</button>
+          </div>
+          <div class="build-meter">
+            <div class="meter-track"><span id="buildMeter"></span></div>
+            <span id="buildCount">٠ من ٨</span>
+          </div>
+        </div>
+
+        <div class="build-main reveal" style="--i:4">
+          <div class="chat-panel">
+            <div class="chat-top">
+              <span class="ai-ava"><svg class="ico"><use href="#i-spark"/></svg></span>
+              <div><strong>مساعد الدراسة</strong><small><i class="online"></i> متصل</small></div>
+              <span class="chat-badge">AI</span>
+            </div>
+            <div class="chat-body builder-body" id="buildChat">
+              <div class="bubble ai">اختر عناصر الطلب… ثم أرسله لي. سأكون دقيقًا بقدر ما تكون واضحًا.</div>
+            </div>
+            <div class="composer">
+              <div class="composer-text" id="buildText">اكتب طلبك… أو اختر عناصر من اليمين.</div>
+              <button class="send-btn" id="buildSend" aria-label="أرسل الطلب"><svg class="ico"><use href="#i-send"/></svg></button>
+            </div>
+          </div>
+          <div class="build-actions">
+            <button class="btn btn-ghost btn-sm" id="buildReset"><svg class="ico"><use href="#i-refresh"/></svg> مسح</button>
+            <span class="build-hint" id="buildHint">الطلب الناقص = إجابة ناقصة.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 — محاكاة الرياضيات -->
+  <section class="slide" data-key="sim-math" data-title="محادثة — رياضيات" data-unit="المحطة الثالثة">
+    <div class="wrap">
+      <header class="head tight">
+        <span class="kicker reveal" style="--i:0"><svg class="ico"><use href="#i-chat"/></svg> محادثة مباشرة</span>
+        <h2 class="reveal" style="--i:1">جرّب أن تسأل… <span class="grad">بذكاء</span></h2>
+        <p class="reveal" style="--i:2">طلب واضح… وتلميحات بدل الجواب. اضغط «أرسل طلبي».</p>
+      </header>
+      <div class="sim reveal" style="--i:3">
+        <div class="sim-side">
+          <span class="sim-subject"><svg class="ico"><use href="#i-number"/></svg> رياضيات</span>
+          <p class="sim-prompt" id="mathPrompt">«أنت معلم صبور، ساعدني في حل المسألة بتلميحات، ولا تعطني الجواب النهائي، واشرح بمستوى الصف السابع، واعرض النتيجة في خطوات.»</p>
+          <div class="math-card">
+            <span class="math"><span class="frac"><b>٣</b><b>٤</b></span> + <span class="frac"><b>١</b><b>٢</b></span> = ؟</span>
+          </div>
+          <button class="btn btn-primary" id="mathStart"><svg class="ico"><use href="#i-send"/></svg> أرسل طلبي</button>
+          <button class="btn btn-ghost btn-sm" id="mathReset"><svg class="ico"><use href="#i-refresh"/></svg> أعد المحاولة</button>
+        </div>
+        <div class="chat-panel sim-chat">
+          <div class="chat-top">
+            <span class="ai-ava"><svg class="ico"><use href="#i-spark"/></svg></span>
+            <div><strong>مساعد الدراسة</strong><small><i class="online"></i> يكتب أحيانًا…</small></div>
+            <span class="chat-badge">AI</span>
+          </div>
+          <div class="chat-body" id="mathChat">
+            <div class="bubble ai">جاهز! اضغط «أرسل طلبي»… وسأبدأ بتلميح صغير.</div>
+          </div>
+          <div class="choice-bar" id="mathChoices"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 — محاكاة العربية -->
+  <section class="slide" data-key="sim-arabic" data-title="محادثة — عربي" data-unit="المحطة الثالثة">
+    <div class="wrap">
+      <header class="head tight">
+        <span class="kicker reveal" style="--i:0"><svg class="ico"><use href="#i-chat"/></svg> نفس الأداة… حالة أخرى</span>
+        <h2 class="reveal" style="--i:1">اختبرني… <span class="hl">سؤالًا بسؤال</span></h2>
+        <p class="reveal" style="--i:2">لاحظ: طلبنا منه ألا يغرقنا بالأسئلة… فالتزم.</p>
+      </header>
+      <div class="sim reveal" style="--i:3">
+        <div class="sim-side">
+          <span class="sim-subject purple"><svg class="ico"><use href="#i-text"/></svg> لغة عربية</span>
+          <p class="sim-prompt">«أنت معلم لغة عربية صبور. اسألني ثلاثة أسئلة متدرجة عن الفعل المضارع، سؤالًا واحدًا في كل مرة، وصحّح إجابتي مع السبب.»</p>
+          <div class="arabic-card"><b>الفعل المضارع</b><span>يكتبُ · يكتبون · نكتبُ</span></div>
+          <button class="btn btn-primary" id="arStart"><svg class="ico"><use href="#i-send"/></svg> أرسل طلبي</button>
+          <button class="btn btn-ghost btn-sm" id="arReset"><svg class="ico"><use href="#i-refresh"/></svg> أعد المحاولة</button>
+        </div>
+        <div class="chat-panel sim-chat">
+          <div class="chat-top">
+            <span class="ai-ava"><svg class="ico"><use href="#i-spark"/></svg></span>
+            <div><strong>مساعد الدراسة</strong><small><i class="online"></i> يكتب أحيانًا…</small></div>
+            <span class="chat-badge">AI</span>
+          </div>
+          <div class="chat-body" id="arChat">
+            <div class="bubble ai">اسألني ما تشاء… سأبدأ بسؤال واحد فقط.</div>
+          </div>
+          <div class="choice-bar" id="arChoices"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 — نفس الأداة طلب مختلف -->
+  <section class="slide" data-key="same-tool" data-title="نفس الأداة… طلب مختلف" data-unit="المحطة الثالثة">
+    <div class="wrap">
+      <header class="head tight">
+        <span class="kicker reveal" style="--i:0">لكل مادة… طلبها</span>
+        <h2 class="reveal" style="--i:1">نفس الأداة… <span class="grad">طلب مختلف</span></h2>
+        <p class="reveal" style="--i:2">بدّل المادة… وشاهد كيف يتغيّر الطلب.</p>
+      </header>
+      <div class="subjects reveal" style="--i:3" id="subjectTabs">
+        <button class="subj is-on" data-s="math"><svg class="ico"><use href="#i-number"/></svg> رياضيات</button>
+        <button class="subj" data-s="bio"><svg class="ico"><use href="#i-flask"/></svg> أحياء</button>
+        <button class="subj" data-s="ar"><svg class="ico"><use href="#i-text"/></svg> عربي</button>
+        <button class="subj" data-s="en"><svg class="ico"><use href="#i-translate"/></svg> إنجليزي</button>
+        <button class="subj" data-s="hist"><svg class="ico"><use href="#i-book"/></svg> تاريخ</button>
+      </div>
+      <article class="subj-card reveal" style="--i:4" id="subjCard">
+        <header><span class="subj-big" id="subjIco"><svg class="ico"><use href="#i-number"/></svg></span><div><strong id="subjName">الرياضيات</strong><small id="subjLevel">الصف السابع</small></div></header>
+        <div class="subj-rows">
+          <div><span>الدور</span><p id="subjRole">معلم رياضيات صبور</p></div>
+          <div><span>المهمة</span><p id="subjTask">ساعدني في حل مسألة جمع الكسور بتلميحات متدرجة</p></div>
+          <div><span>الشكل والقيود</span><p id="subjShape">خطوات قصيرة، وتلميح بعد كل خطوة… بلا جواب نهائي</p></div>
+        </div>
+        <footer><svg class="ico"><use href="#i-bulb"/></svg> <span id="subjWhy">الهدف: فهم طريقة الحل، لا الحصول على الجواب.</span></footer>
+      </article>
+    </div>
+  </section>
+
+  <!-- 14 — جودة الإدخال -->
+  <section class="slide" data-key="input" data-title="أدخل المعلومات بشكل صحيح" data-unit="المحطة الرابعة">
+    <div class="wrap">
+      <header class="head tight">
+        <span class="kicker reveal" style="--i:0">جودة الإدخال</span>
+        <h2 class="reveal" style="--i:1">مدخل سيئ… <span class="hl-red">إجابة سيئة</span></h2>
+        <p class="reveal" style="--i:2">جرّب الأوضاع الثلاثة… ولاحظ الفرق.</p>
+      </header>
+      <div class="input-lab">
+        <div class="camera-card reveal" style="--i:3">
+          <div class="paper" id="paper">
+            <span class="paper-title">مسألة اليوم</span>
+            <span class="paper-math"><span class="frac"><b>٣</b><b>٤</b></span> + <span class="frac"><b>١</b><b>٢</b></span> = ؟</span>
+            <span class="paper-name">اسمي: ــــــــ</span>
+            <span class="blur-layer"></span>
+          </div>
+          <div class="modes" id="inputModes">
+            <button class="mode is-on" data-mode="clear"><svg class="ico"><use href="#i-camera"/></svg> صورة واضحة</button>
+            <button class="mode" data-mode="blur"><svg class="ico"><use href="#i-warning"/></svg> ضبابية</button>
+            <button class="mode" data-mode="text"><svg class="ico"><use href="#i-text"/></svg> نص</button>
+          </div>
+          <button class="btn btn-blue" id="inputSend"><svg class="ico"><use href="#i-send"/></svg> أرسل إلى AI</button>
+        </div>
+        <div class="input-chat reveal" style="--i:4">
+          <div class="chat-panel">
+            <div class="chat-top">
+              <span class="ai-ava"><svg class="ico"><use href="#i-spark"/></svg></span>
+              <div><strong>مساعد الدراسة</strong><small><i class="online"></i> يقرأ ما ترسله</small></div>
+              <span class="chat-badge">AI</span>
+            </div>
+            <div class="chat-body" id="inputChat"><div class="bubble ai">أرسل الصورة… وسأخبرك بما أرى.</div></div>
+          </div>
+          <div class="principles">
+            <span><svg class="ico"><use href="#i-eye"/></svg> صورة واضحة</span>
+            <span><svg class="ico"><use href="#i-text"/></svg> النص أدق</span>
+            <span><svg class="ico"><use href="#i-check"/></svg> معلومات صحيحة</span>
+            <span><svg class="ico"><use href="#i-layers"/></svg> السياق كامل</span>
+            <span><svg class="ico"><use href="#i-lock"/></svg> بلا معلومات شخصية</span>
+          </div>
+        </div>
+      </div>
+      <p class="note reveal" style="--i:5"><svg class="ico"><use href="#i-layers"/></svg> معلومات ناقصة أو خاطئة = إجابة ناقصة أو خاطئة. أرسل السياق كاملًا.</p>
+    </div>
+  </section>
+
+  <!-- 15 — الاختبار -->
+  <section class="slide" data-key="quiz" data-title="التحدي الأخير" data-unit="الختام">
+    <div class="wrap">
+      <header class="head tight">
+        <span class="kicker reveal" style="--i:0">التحدي الأخير</span>
+        <h2 class="reveal" style="--i:1">هل أنت مستعد؟</h2>
+        <p class="reveal" style="--i:2">سبعة أسئلة… من كل المحطات.</p>
+      </header>
+      <div class="quiz card reveal" style="--i:3" id="quiz">
+        <div class="quiz-top">
+          <div class="quiz-bar"><span id="quizBar"></span></div>
+          <span class="quiz-count" id="quizCount">١ من ٧</span>
+          <span class="quiz-score" id="quizScore"><svg class="ico"><use href="#i-spark"/></svg> ٠</span>
+        </div>
+        <div id="quizBody"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 16 — الخلاصة -->
+  <section class="slide" data-key="recap" data-title="الخلاصة والتحدي" data-unit="الختام">
+    <div class="wrap">
+      <header class="head tight">
+        <span class="kicker reveal" style="--i:0"><svg class="ico"><use href="#i-trophy"/></svg> وصلنا</span>
+        <h2 class="reveal" style="--i:1">ثلاثة دروس… <span class="grad">تدوم</span></h2>
+      </header>
+      <div class="recap">
+        <article class="rec reveal" style="--i:2">
+          <span class="rec-ico green"><svg class="ico"><use href="#i-brain"/></svg></span>
+          <strong>يتعلّم من الأمثلة</strong>
+          <p>يلاحظ الأنماط… ثم يستخدمها في مثال جديد.</p>
+        </article>
+        <article class="rec reveal" style="--i:3">
+          <span class="rec-ico violet"><svg class="ico"><use href="#i-chat"/></svg></span>
+          <strong>الطلب يصنع الفرق</strong>
+          <p>دور + مهمة + مستوى + شكل + قيود… إجابة أفضل.</p>
+        </article>
+        <article class="rec reveal" style="--i:4">
+          <span class="rec-ico blue"><svg class="ico"><use href="#i-shield"/></svg></span>
+          <strong>تحقّق… ولا تشارك</strong>
+          <p>راجع المعلومة، وأدخل صورة واضحة، واحمِ خصوصيتك.</p>
+        </article>
+      </div>
+
+      <div class="homework reveal" style="--i:5">
+        <h3><svg class="ico"><use href="#i-home"/></svg> تحدّي البيت</h3>
+        <div class="hw-row">
+          <div class="hw"><b>١</b><p>اكتب طلبًا كاملًا لدرس تحبّه.</p></div>
+          <div class="hw"><b>٢</b><p>اسأل AI سؤالًا… ثم تحقّق من جوابه.</p></div>
+          <div class="hw"><b>٣</b><p>اذكر مثالين: واحد AI وآخر ليس AI.</p></div>
+        </div>
+      </div>
+
+      <div class="recap-foot reveal" style="--i:6">
+        <div class="xp-total"><svg class="mascot" viewBox="0 0 220 240"><use href="#robot"/></svg><div><strong id="finalXP">٠ XP</strong><span>حصيلة هذه الجلسة</span></div></div>
+        <div class="actions">
+          <button class="btn btn-primary" data-goto="cover"><svg class="ico"><use href="#i-play"/></svg> أعد العرض</button>
+          <button class="btn btn-ghost" data-goto="quiz"><svg class="ico"><use href="#i-trophy"/></svg> جرّب الاختبار</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<nav class="deck-nav" aria-label="التنقل بين الشرائح">
+  <button class="nav-btn" id="prevBtn" aria-label="الشريحة السابقة"><svg class="ico"><use href="#i-arrow-right"/></svg><span>السابق</span></button>
+  <div class="nav-center">
+    <span id="navCounter">١ من ١٦</span>
+    <div class="nav-dots" id="navDots"></div>
+  </div>
+  <button class="nav-btn nav-next" id="nextBtn" aria-label="الشريحة التالية"><span>التالي</span><svg class="ico"><use href="#i-arrow-left"/></svg></button>
+</nav>
+
+<aside class="outline" id="outline" aria-hidden="true">
+  <div class="outline-head">
+    <div><strong>فهرس الشرائح</strong><span>اضغط للانتقال</span></div>
+    <button class="icon-btn" id="outlineClose" aria-label="إغلاق"><svg class="ico"><use href="#i-x"/></svg></button>
+  </div>
+  <div class="outline-body" id="outlineBody"></div>
+  <div class="outline-foot"><kbd>F</kbd> ملء الشاشة · <kbd>←</kbd> <kbd>→</kbd> تنقّل · <kbd>E</kbd> الفهرس</div>
+</aside>
+
+<div class="toast" id="toast" role="status"></div>
+<div class="confetti" id="confetti" aria-hidden="true"></div>
+
+<script src="app.js"></script>
+<script src="demos.js"></script>
+</body>
+</html>
